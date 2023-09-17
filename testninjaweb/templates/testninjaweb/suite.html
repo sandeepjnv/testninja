@@ -1,0 +1,362 @@
+{% extends "testninjaweb/index.html" %}
+{% block title %}Suite{% endblock %}
+{% block maincontent %}
+    <div class="suite">
+        <!-- Heading block-->
+        <div class="suite-header">
+            <h3>TRAACS</h3>
+        </div>
+        <!--suite Navigation-->
+        <div class="suite-subcontent">
+            <div class="sidebar-suite">
+            <ul id="suitsList">
+                {% comment %} <li class="active">TRAACS</li> {% endcomment %}
+            </ul>
+            </div>
+            <!--suite content-->
+            <div class="suite-content">
+                <!--suite actions-->
+                <div class="suite-actions">
+                    <input type="text" id="testName" placeholder="Test Name"/>
+                    <div class="suitActionBtns">
+                        <button id="btnSaveTest">Save</button>
+                        <button id="btnRunTest">Run Test</button>
+                    </div>
+                </div>
+                <div class="suite-body">
+                    <input type="text" id="baseUrl" placeholder="https://traacs.in/login"/>
+                    
+                    <div class="suiteSubActions">
+                        <h6>Work-flow</h6>
+                        <button id="btnNewAction">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                <path fill-rule="evenodd" d="M12 5.25a.75.75 0 01.75.75v5.25H18a.75.75 0 010 1.5h-5.25V18a.75.75 0 01-1.5 0v-5.25H6a.75.75 0 010-1.5h5.25V6a.75.75 0 01.75-.75z" clip-rule="evenodd" />
+                            </svg>
+                            New  Action
+                        </button>
+                    </div>
+
+                    <table id="tblWorkflow">
+                        <thead>
+                            <th style="width:4%"></th>
+                            <th style="width:4%"></th>
+                            <th style="width:20%">Action</th>
+                            <th style="width:45%">Target</th>
+                            <th style="width:22.5%">Value</th>
+                            <th style="width:3.5%"></th>
+                        </thead>
+                        <tbody>
+                            {% comment %} <tr>
+                                <th></th>
+                                <td>1</td>
+                                <td>
+                                    <select class="suiteDropdown">
+                                        <option value="click">Click</option>
+                                        <option value="write">Enter Text</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <div>
+                                        <div class="targetDiv">
+                                            <select class="suiteDropdown targetdropDown">
+                                                <option value="id">Id</option>
+                                                <option value="id">Xpath</option>
+                                                <option value="id">Element</option>
+                                                <option value="id">Class</option>
+                                            </select>
+                                            <input type="text" class="targetValue"/>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="targetDiv">
+                                        <input type="text" class="actionValue"/>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btnActionConfig">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                                        </svg>   
+                                    </button>                                   
+                                </td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td>2</td>
+                                <td>
+                                    <select class="suiteDropdown">
+                                        <option value="click">Click</option>
+                                        <option value="write">Enter Text</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <div class="targetDiv">
+                                        <select class="suiteDropdown targetdropDown">
+                                            <option value="id">Id</option>
+                                            <option value="id">Xpath</option>
+                                            <option value="id">Element</option>
+                                            <option value="id">Class</option>
+                                        </select>
+                                        <input type="text" class="targetValue"/>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="targetDiv">
+                                        <input type="text" class="actionValue"/>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btnActionConfig">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                                        </svg>  
+                                    </button> 
+                                </td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td>3</td>
+                                <td>
+                                    <select class="suiteDropdown">
+                                        <option value="click">Click</option>
+                                        <option value="write">Enter Text</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <div class="targetDiv">
+                                        <select class="suiteDropdown targetdropDown">
+                                            <option value="id">Id</option>
+                                            <option value="id">Xpath</option>
+                                            <option value="id">Element</option>
+                                            <option value="id">Class</option>
+                                        </select>
+                                        <input type="text" class="targetValue"/>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="targetDiv">
+                                        <input type="text" class="actionValue"/>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btnActionConfig">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                                        </svg>  
+                                    </button> 
+                                </td>
+                            </tr> {% endcomment %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            var initialData = JSON.parse('{{ initialValues|escapejs }}');
+
+            var suiteMenu = "";
+            var suiteIndex = 0
+            $.each(initialData, function (key, value) {
+                suiteMenu += "<li><label>"+key+"</label><ul>"
+                $.each(value,function(index,testDetails){
+                    var active = "";
+                    if(index==0 && suiteIndex == 0){
+                        active = "class='active'";
+                    }
+                    suiteMenu += "<li "+active+" onclick='loadWorkflow("+testDetails.id+")'>"+testDetails.name+"</li>";
+                });
+                suiteMenu += "</ul></li>";
+                suiteIndex+=1;
+            }); 
+            $("#suitsList").html(suiteMenu);
+        });
+
+        $("#btnNewAction").click(function(){
+            addNewAction();
+        });
+
+        function addNewAction(){
+            var index =  $("#tblWorkflow tbody tr").length+1;
+            actionHtml = `<tr id="actionRow`+index+`">
+                <th></th>
+                <td>`+index+`</td>
+                <td>
+                    <select class="suiteDropdown">
+                        <option value="click">Click</option>
+                        <option value="write">Enter text</option>
+                        <option value="element-wait">Wait for element</option>
+                    </select>
+                </td>
+                <td>
+                    <div class="targetDiv">
+                        <select class="suiteDropdown targetdropDown">
+                            <option value="id">Id</option>
+                            <option value="xpath">Xpath</option>
+                            <option value="element">Element</option>
+                            <option value="class">Class</option>
+                        </select>
+                        <input type="text" class="targetValue"/>
+                    </div>
+                </td>
+                <td>
+                    <div class="targetDiv">
+                        <input type="text" class="actionValue"/>
+                    </div>
+                </td>
+                <td>
+                    <button class="btnActionConfig">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                        </svg>  
+                    </button> 
+                </td>
+            </tr>`;
+
+            $("#tblWorkflow tbody").append(actionHtml);
+        }
+
+        // Build ninja script
+        function buildNinjaScript(){
+            // actions
+            var workflow = []
+            $('#tblWorkflow tbody tr').each(function () {
+                var $row = $(this);
+    
+                // Get values from the current row
+                var actionType = $row.find('.suiteDropdown').val();
+                var targetIdentifier = $row.find('.targetdropDown').val();
+                var targetValue = $row.find('.targetValue').val();
+                var actionValue = $row.find('.actionValue').val();
+    
+                // Construct the JSON object for the current row
+                var item = {
+                    "actionType": actionType,
+                    "target": {
+                        "identifier": targetIdentifier,
+                        "value": targetValue
+                    },
+                    "value": actionValue
+                };
+    
+                // Add the item to the jsonData array
+                workflow.push(item);
+            });
+
+            return workflow;
+        }
+
+        $("#btnRunTest").click(function(){
+            var actions = buildNinjaScript();
+            var baseUrl = $("#baseUrl").val();
+
+            testData = {
+                "actions" : actions,
+                "url" : baseUrl
+            };
+
+            $.ajax({
+                url:"/runtest/",
+                type: 'POST',
+                data: JSON.stringify(testData),
+                dataType : 'json',
+                headers: {'X-CSRFToken': '{{ csrf_token }}'},
+                success : function(response) {
+                }
+              });
+        });
+
+        //save test case
+        $("#btnSaveTest").click(function(){
+            var actions = buildNinjaScript();
+            var baseUrl = $("#baseUrl").val();
+
+            var workflowConfig = {
+                "actions" : actions,
+                "url" : baseUrl
+            };
+
+            var testName = $("#testName").val().split('/')[1].trim();
+
+            var testDetails ={
+                "name":testName,
+                "workflowconfig":workflowConfig
+            };
+
+            // Save
+            testDetails["operation"] = "SAVE";
+            testDetails["id"] = "";
+            testData = $("#testName").data()
+            if(!$.isEmptyObject(testData)){
+                testDetails["operation"] = "UPDATE";
+                testDetails["id"] = testData["data-workflow-id"];
+            }
+
+            $.ajax({
+                url:"/savetest/",
+                type: 'POST',
+                data: JSON.stringify(testDetails),
+                dataType : 'json',
+                headers: {'X-CSRFToken': '{{ csrf_token }}'},
+                success : function(response) {
+                    if(response.status == 1){
+                        displayToast("success",response.message);
+                    }
+                    else if(response.status == 0){
+                        displayToast("danger",response.message);
+                    }
+                }
+            });
+        });
+
+        // loadWorkflow
+        function loadWorkflow(id){
+            var test = {
+                "id" : id
+            };
+
+            $.ajax({
+                url:"/loadworkflow/",
+                type: 'POST',
+                data: JSON.stringify(test),
+                dataType : 'json',
+                headers: {'X-CSRFToken': '{{ csrf_token }}'},
+                success : function(response) {
+
+                    renderWorkflow(response.workflow);
+                }
+              });
+        }
+
+        // render workflow to Interface
+        function renderWorkflow(workflow){
+            // @todo - clear all data
+            $("#tblWorkflow tbody").html("");
+
+            // clear current table
+            $("#testName").val(workflow.suitName+" / "+workflow.name);
+            $("#testName").data({"data-workflow-id":workflow.id});
+            $("#baseUrl").val(workflow.workflowconfig.url);
+            
+            // action render
+            var actions = "";
+            $.each(workflow.workflowconfig.actions,function(index,action){
+                var lastIndex = $("#tblWorkflow tbody tr").length;
+                addNewAction();
+                
+                var rowId = "#actionRow"+parseInt(lastIndex+1);
+                // Action
+                $(rowId).find(".suiteDropdown").val(action.actionType);
+
+                // Target
+                $(rowId).find(".targetdropDown").val(action.target.identifier);
+                $(rowId).find(".targetValue").val(action.target.value);
+
+                // Action value
+                $(rowId).find(".actionValue").val(action.value);
+            });
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "testninjaweb/base.html" %}
+{% block content %} 
+{% include "testninjaweb/navbar.html" %}
+<main class="ninja-content">
+    {% block maincontent %} 
+        <img class="ninjaLogo" style="position:absolute;width:200px;left:40.5%;top:35%;" src="https://i.pinimg.com/564x/5b/47/8e/5b478e7128a2a04d23c3c68bd96fbf2e.jpg" alt="Background" />
+        <h1 style="position:absolute;top:55%;left:37.5%;color:#F37401;  font-family: verdana;font-weight: 600;letter-spacing: 12.5px;">TestNinja</h1>
+    {% endblock %}       
+</main>
+{% include "testninjaweb/toasts.html" %}
+{% endblock %} 
