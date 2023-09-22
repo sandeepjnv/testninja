@@ -29,7 +29,7 @@ def executeWorkflow(workflow):
             value = component["value"]
 
             # element
-            if(action["actionType"] not in ["wait",]):
+            if(action["actionType"] not in ["wait"]):
                 if component["identifier"] == "id":
                     elementStr = (By.ID,value)
                     element = driver.find_element(By.ID,value)

@@ -25,7 +25,7 @@ def getSuiteInitialValues():
         workflows = Workflow.objects.all()
         suitname_dict = defaultdict(list)
         for workflow in workflows:
-            suitname_dict[workflow.suitName].append({"name":workflow.name,"id":workflow.pk})
+            suitname_dict[workflow.suiteName].append({"name":workflow.name,"id":workflow.pk})
 
         suitname_dict = dict(suitname_dict)
         return suitname_dict
@@ -53,15 +53,27 @@ def saveTest(request):
                 workflow = Workflow.objects.get(id=testDetails["id"])
             
             workflow.name = testDetails["name"]
-            workflow.suitName = "TRAACS"
+            workflow.suiteName = testDetails["suiteName"]
             workflow.workflowconfig = testDetails["workflowconfig"]
             workflow.save()
         
-        return JsonResponse({'status':1,'message': 'Test Saved Successfully'})
+        return JsonResponse({'status':1,'message': 'Test Saved Successfully',"id":workflow.id})
     except Exception as e:
         print(e)
         return JsonResponse({'status':0,'message': 'Something went wrong'})
-    
+
+def deleteTest(request):
+    try :
+        if request.method == 'POST':
+            testDetails = json.loads(request.body)
+            workflow = Workflow.objects.get(id=testDetails["id"])
+            workflow.delete()
+
+            return JsonResponse({'status':1,'message': "Workflow deleted successfully"})
+    except Exception as e:
+        print(e)
+        return JsonResponse({'status':0,'message': 'Something went wrong'})
+
 def loadWorkflow(request):
     try :
         if request.method == 'POST':
@@ -69,6 +81,15 @@ def loadWorkflow(request):
             workFlowDetails = model_to_dict(Workflow.objects.get(id=test["id"]))
 
             return JsonResponse({'status':1,'workflow': workFlowDetails})
+    except Exception as e:
+        print(e)
+        return JsonResponse({'status':0,'message': 'Something went wrong'})
+    
+def loadAllSuitesAndTest(request):
+    try :
+        if request.method == 'GET':
+            suites = getSuiteInitialValues()
+            return JsonResponse({'status':1,'suitesList': suites})
     except Exception as e:
         print(e)
         return JsonResponse({'status':0,'message': 'Something went wrong'})

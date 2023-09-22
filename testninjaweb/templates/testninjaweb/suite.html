@@ -9,23 +9,42 @@
         <!--suite Navigation-->
         <div class="suite-subcontent">
             <div class="sidebar-suite">
-            <ul id="suitsList">
-                {% comment %} <li class="active">TRAACS</li> {% endcomment %}
-            </ul>
+                <div id="sidebar-action">
+                    <button id="newWorkflow" title="New Workflow">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m3.75 9v6m3-3H9m1.5-12H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                        </svg>                                                 
+                    </button>
+                    <button id="newSuite" title="New Suite">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 10.5v6m3-3H9m4.06-7.19l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z" />
+                        </svg>                          
+                    </button>
+                </div>
+                <ul id="suitsList">
+
+                </ul>
             </div>
             <!--suite content-->
             <div class="suite-content">
                 <!--suite actions-->
                 <div class="suite-actions">
+                    <input type="text" id="suiteName" placeholder="Suite Name"/>
+                    <span>/</span>
                     <input type="text" id="testName" placeholder="Test Name"/>
                     <div class="suitActionBtns">
+                        <button id="btnDeleteTest">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                            </svg>
+                          </button>
                         <button id="btnSaveTest">Save</button>
                         <button id="btnRunTest">Run Test</button>
                     </div>
                 </div>
                 <div class="suite-body">
                     <input type="text" id="baseUrl" placeholder="https://traacs.in/login"/>
-                    
+
                     <div class="suiteSubActions">
                         <h6>Work-flow</h6>
                         <button id="btnNewAction">
@@ -46,174 +65,96 @@
                             <th style="width:3.5%"></th>
                         </thead>
                         <tbody>
-                            {% comment %} <tr>
-                                <th></th>
-                                <td>1</td>
-                                <td>
-                                    <select class="suiteDropdown">
-                                        <option value="click">Click</option>
-                                        <option value="write">Enter Text</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <div>
-                                        <div class="targetDiv">
-                                            <select class="suiteDropdown targetdropDown">
-                                                <option value="id">Id</option>
-                                                <option value="id">Xpath</option>
-                                                <option value="id">Element</option>
-                                                <option value="id">Class</option>
-                                            </select>
-                                            <input type="text" class="targetValue"/>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="targetDiv">
-                                        <input type="text" class="actionValue"/>
-                                    </div>
-                                </td>
-                                <td>
-                                    <button class="btnActionConfig">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-                                        </svg>   
-                                    </button>                                   
-                                </td>
-                            </tr>
-                            <tr>
-                                <th></th>
-                                <td>2</td>
-                                <td>
-                                    <select class="suiteDropdown">
-                                        <option value="click">Click</option>
-                                        <option value="write">Enter Text</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <div class="targetDiv">
-                                        <select class="suiteDropdown targetdropDown">
-                                            <option value="id">Id</option>
-                                            <option value="id">Xpath</option>
-                                            <option value="id">Element</option>
-                                            <option value="id">Class</option>
-                                        </select>
-                                        <input type="text" class="targetValue"/>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="targetDiv">
-                                        <input type="text" class="actionValue"/>
-                                    </div>
-                                </td>
-                                <td>
-                                    <button class="btnActionConfig">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-                                        </svg>  
-                                    </button> 
-                                </td>
-                            </tr>
-                            <tr>
-                                <th></th>
-                                <td>3</td>
-                                <td>
-                                    <select class="suiteDropdown">
-                                        <option value="click">Click</option>
-                                        <option value="write">Enter Text</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <div class="targetDiv">
-                                        <select class="suiteDropdown targetdropDown">
-                                            <option value="id">Id</option>
-                                            <option value="id">Xpath</option>
-                                            <option value="id">Element</option>
-                                            <option value="id">Class</option>
-                                        </select>
-                                        <input type="text" class="targetValue"/>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="targetDiv">
-                                        <input type="text" class="actionValue"/>
-                                    </div>
-                                </td>
-                                <td>
-                                    <button class="btnActionConfig">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-                                        </svg>  
-                                    </button> 
-                                </td>
-                            </tr> {% endcomment %}
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+    <div class="options-list">
+        <ul>
+          <li>Option 1</li>
+          <li>Option 2</li>
+          <!-- Add more options as needed -->
+        </ul>
+      </div>
     <script>
+        var actionElement = `<tr id="actionRow{INDEX}">
+            <td></td>
+            <td>{INDEX}</td>
+            <td>
+                <select class="suiteDropdown">
+                    <option value="click">Click</option>
+                    <option value="write">Enter text</option>
+                    <option value="element-wait">Wait for element</option>
+                    <option value="wait">Explicit Wait</option>
+                    <option value="scrolltoview">Scroll to view</option>
+                    <option value="forcewrite">Forced write</option>
+                    <option value="validate">Validate</option>
+                </select>
+            </td>
+            <td>
+                <div class="targetDiv">
+                    <select class="suiteDropdown targetdropDown">
+                        <option value="id">Id</option>
+                        <option value="xpath">Xpath</option>
+                        <option value="element">Element</option>
+                        <option value="class">Class</option>
+                    </select>
+                    <input type="text" class="targetValue"/>
+                </div>
+            </td>
+            <td>
+                <div class="targetDiv">
+                    <input type="text" class="actionValue"/>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <button data-actionindex="{INDEX}" class="btn btn-secondary actionBtn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                        </svg> 
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" onclick="addActionFunc({INDEX})" href="#">Add action</a>
+                        <a class="dropdown-item" href="#">Import action</a>
+                        <a class="dropdown-item deleteAction" onclick="deleteActionFunc({INDEX})" href="#">Delete action</a>
+                      </div>
+                </div>
+            </td>
+        </tr>`;
+
         $(document).ready(function () {
             var initialData = JSON.parse('{{ initialValues|escapejs }}');
 
-            var suiteMenu = "";
-            var suiteIndex = 0
-            $.each(initialData, function (key, value) {
-                suiteMenu += "<li><label>"+key+"</label><ul>"
-                $.each(value,function(index,testDetails){
-                    var active = "";
-                    if(index==0 && suiteIndex == 0){
-                        active = "class='active'";
-                    }
-                    suiteMenu += "<li "+active+" onclick='loadWorkflow("+testDetails.id+")'>"+testDetails.name+"</li>";
+            loadSuiteAndWorkflowList(initialData);
+
+            const buttons = document.querySelectorAll('.btnActionConfig');
+  
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                // Find the corresponding options list for this button's row
+                const row = e.target.closest('tr');
+                const optionsList = row.querySelector('.options-list');
+                
+                // Toggle the visibility of the options list
+                if (optionsList.style.display === 'none' || optionsList.style.display === '') {
+                    optionsList.style.display = 'block';
+                } else {
+                    optionsList.style.display = 'none';
+                }
                 });
-                suiteMenu += "</ul></li>";
-                suiteIndex+=1;
-            }); 
-            $("#suitsList").html(suiteMenu);
+            });
         });
 
         $("#btnNewAction").click(function(){
-            addNewAction();
+            var index =  $("#tblWorkflow tbody tr").length+1;
+            addNewAction(index);
         });
 
-        function addNewAction(){
-            var index =  $("#tblWorkflow tbody tr").length+1;
-            actionHtml = `<tr id="actionRow`+index+`">
-                <th></th>
-                <td>`+index+`</td>
-                <td>
-                    <select class="suiteDropdown">
-                        <option value="click">Click</option>
-                        <option value="write">Enter text</option>
-                        <option value="element-wait">Wait for element</option>
-                    </select>
-                </td>
-                <td>
-                    <div class="targetDiv">
-                        <select class="suiteDropdown targetdropDown">
-                            <option value="id">Id</option>
-                            <option value="xpath">Xpath</option>
-                            <option value="element">Element</option>
-                            <option value="class">Class</option>
-                        </select>
-                        <input type="text" class="targetValue"/>
-                    </div>
-                </td>
-                <td>
-                    <div class="targetDiv">
-                        <input type="text" class="actionValue"/>
-                    </div>
-                </td>
-                <td>
-                    <button class="btnActionConfig">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-                        </svg>  
-                    </button> 
-                </td>
-            </tr>`;
+        function addNewAction(index){
+            actionHtml = actionElement.replace(/\{INDEX}/g,index);
 
             $("#tblWorkflow tbody").append(actionHtml);
         }
@@ -248,6 +189,7 @@
             return workflow;
         }
 
+        // run test
         $("#btnRunTest").click(function(){
             var actions = buildNinjaScript();
             var baseUrl = $("#baseUrl").val();
@@ -269,6 +211,37 @@
         });
 
         //save test case
+        $("#btnDeleteTest").click(function(){
+            var workflow = $("#btnDeleteTest").data();
+            if(workflow["dataWorkflowId"]){
+            
+                var testDetails ={
+                    "id":workflow["dataWorkflowId"]
+                };
+
+                $.ajax({
+                    url:"/deletetest/",
+                    type: 'POST',
+                    data: JSON.stringify(testDetails),
+                    dataType : 'json',
+                    headers: {'X-CSRFToken': '{{ csrf_token }}'},
+                    success : function(response) {
+                        if(response.status == 1){
+                            displayToast("success",response.message);
+                            resetSuite();
+                            loadSuitesandWorkflow();
+                        }
+                        else if(response.status == 0){
+                            displayToast("danger",response.message);
+                        }
+                    }
+                });
+            }
+            else{
+                displayToast("warning","Choose one test to delete");
+            }
+        });
+
         $("#btnSaveTest").click(function(){
             var actions = buildNinjaScript();
             var baseUrl = $("#baseUrl").val();
@@ -278,9 +251,16 @@
                 "url" : baseUrl
             };
 
-            var testName = $("#testName").val().split('/')[1].trim();
+            var testName = $("#testName").val().trim();
+            var suiteName = $("#suiteName").val().trim();
+        
+            if(testName == "" || suiteName == ""){
+                displayToast("danger","Test and suite name are mandatory");
+                return false;
+            }
 
             var testDetails ={
+                "suiteName":suiteName,
                 "name":testName,
                 "workflowconfig":workflowConfig
             };
@@ -291,7 +271,7 @@
             testData = $("#testName").data()
             if(!$.isEmptyObject(testData)){
                 testDetails["operation"] = "UPDATE";
-                testDetails["id"] = testData["data-workflow-id"];
+                testDetails["id"] = testData["dataWorkflowId"];
             }
 
             $.ajax({
@@ -303,6 +283,9 @@
                 success : function(response) {
                     if(response.status == 1){
                         displayToast("success",response.message);
+                        $("#testName").data({"dataWorkflowId":response.id});
+                        $("#btnDeleteTest").data({"dataWorkflowId":response.id});
+                        loadSuitesandWorkflow(response.id);
                     }
                     else if(response.status == 0){
                         displayToast("danger",response.message);
@@ -324,7 +307,8 @@
                 dataType : 'json',
                 headers: {'X-CSRFToken': '{{ csrf_token }}'},
                 success : function(response) {
-
+                    $("#suitsList li").removeClass("active"); 
+                    $("#workflow"+id).addClass("active"); 
                     renderWorkflow(response.workflow);
                 }
               });
@@ -336,15 +320,17 @@
             $("#tblWorkflow tbody").html("");
 
             // clear current table
-            $("#testName").val(workflow.suitName+" / "+workflow.name);
-            $("#testName").data({"data-workflow-id":workflow.id});
+            $("#testName").val(workflow.name);
+            $("#suiteName").val(workflow.suiteName);
+            $("#testName").data({"dataWorkflowId":workflow.id});
+            $("#btnDeleteTest").data({"dataWorkflowId":workflow.id});
             $("#baseUrl").val(workflow.workflowconfig.url);
             
             // action render
             var actions = "";
             $.each(workflow.workflowconfig.actions,function(index,action){
                 var lastIndex = $("#tblWorkflow tbody tr").length;
-                addNewAction();
+                addNewAction(lastIndex+1);
                 
                 var rowId = "#actionRow"+parseInt(lastIndex+1);
                 // Action
@@ -357,6 +343,84 @@
                 // Action value
                 $(rowId).find(".actionValue").val(action.value);
             });
+        }
+
+        $("#newWorkflow").click(function(){
+            resetSuite();
+        });
+
+        // reset suite  window
+        function resetSuite(){
+            $("#testName,#baseUrl,#suiteName").val('');
+            $("#tblWorkflow tbody").html('');
+            $("#suitsList li").removeClass("active");
+            $("#testName,#btnDeleteTest").removeData("dataWorkflowId") 
+        }
+
+        function loadSuiteAndWorkflowList(jsonMenus){
+            var suiteMenu = "";
+            var suiteIndex = 0;
+            $.each(jsonMenus, function (key, value) {
+                suiteMenu += "<li><label>"+key+"</label><ul>"
+                $.each(value,function(index,testDetails){
+                    suiteMenu += "<li id='workflow"+testDetails.id+"' onclick='loadWorkflow("+testDetails.id+")'>"+testDetails.name+"</li>";
+                });
+                suiteMenu += "</ul></li>";
+                suiteIndex+=1;
+            }); 
+            $("#suitsList").html(suiteMenu);
+        }
+
+        // loadWorkflow
+        function loadSuitesandWorkflow(id){
+            $.ajax({
+                url:"/loadsuiteslist/",
+                type: 'GET',
+                dataType : 'json',
+                headers: {'X-CSRFToken': '{{ csrf_token }}'},
+                success : function(response) {
+                    suites = response.suitesList;
+                    loadSuiteAndWorkflowList(suites);
+                    $("#workflow"+id).addClass("active"); 
+                }
+              });
+        }
+
+        // delete action
+        function deleteActionFunc(index){
+            $("#actionRow"+index).remove();
+            const rows = $("#tblWorkflow tr");
+            for (let i = index; i < rows.length; i++) {
+                $(rows[i]).attr("id","actionRow"+i);
+                $(rows[i]).find("td:last").find(".actionBtn").attr("data-actionindex",i);
+                const rowData = $(rows[i]).find("td:eq(1)");
+                rowData.text(`${i}`);
+                $(rows[i]).find("td:last").find(".actionBtn").attr("data-actionindex",i);
+                $(rows[i]).find("td:last").find(".deleteAction").attr("onclick","deleteActionFunc("+i+")");
+            }
+        }
+
+        // add new action
+        function addActionFunc(index){
+            var newRow = actionElement.replace(/\{INDEX}/g,index);
+
+            if (index === 0) {
+                // If the index is 0, prepend the new row at the beginning
+                $('#tblWorkflow tbody').prepend(newRow);
+            } else {
+                // Otherwise, insert the new row after the row at the specified index
+                $('#tblWorkflow tr:eq(' + (index) + ')').after(newRow);
+            }
+
+            const rows = $("#tblWorkflow tr");
+            for (let i = index+1; i < rows.length; i++) {
+                $(rows[i]).attr("id","actionRow"+i);
+                $(rows[i]).find("td:last").find(".actionBtn").attr("data-actionindex",i);
+                const rowData = $(rows[i]).find("td:eq(1)");
+                rowData.text(`${i}`);
+                $(rows[i]).find("td:last").find(".actionBtn").attr("data-actionindex",i);
+                $(rows[i]).find("td:last").find(".deleteAction").attr("onclick","deleteActionFunc("+i+")");
+            }
         }
     </script>
 {% endblock %}
