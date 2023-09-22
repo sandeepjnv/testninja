@@ -3,5 +3,4 @@
 **/db.sqlite3
 /geckodriver.log
 /staticfiles
-*.[Cc]ache
 *.pyc
