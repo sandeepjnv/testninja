@@ -381,3 +381,33 @@
         width: 20%;
     }
 }
+
+#toast-success ,#toast-danger ,#toast-warning{
+    border-radius: 10px;
+}
+#toast-success .success-svg{
+    width: 20px;
+    color: green;
+}
+
+#toast-danger .danger-svg{
+    width: 20px;
+    color: red;
+}
+
+#toast-warning .warning-svg{
+    width: 20px;
+    color: orange;
+}
+
+.toast-button{
+    border: none;
+    background: none;
+}
+.toast-button svg{
+    width: 10px
+}
+
+#toast-success button,#toast-danger button,#toast-warning button{
+    cursor: pointer;
+}
