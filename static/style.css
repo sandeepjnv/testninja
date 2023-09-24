@@ -197,6 +197,13 @@
     justify-content: space-evenly;
 }
 
+.suite-content-log{
+    display: flex;
+    flex-direction: row;
+}
+.suite-body{
+    width: 65%;
+}
 .suite-body input{
     border: 1px solid #e7e7e7;  
     color: grey;
@@ -368,19 +375,7 @@
 }
 
 
-/* normal screen 1440px */
-@media screen and (min-width: 1440px) {
-    .suite-actions .suitActionBtns {
-        width: 27.5%;
-    }
-}
 
-/* large screen 1920px */
-@media screen and (min-width: 1920px) {
-    .suite-actions .suitActionBtns {
-        width: 20%;
-    }
-}
 
 #toast-success ,#toast-danger ,#toast-warning{
     border-radius: 10px;
@@ -410,4 +405,130 @@
 
 #toast-success button,#toast-danger button,#toast-warning button{
     cursor: pointer;
+}
+
+.suite-log{
+    width: 35%;
+    overflow-y: scroll;
+    margin: 0 10px;
+    min-height: 100vh;
+    border: 1px solid #e6e6e6;
+}
+
+#log-tab-header{
+    display: flex;
+    flex-direction: row;
+}
+#log-tab-header button {
+    width: 50%;
+    border: none;
+    height: 50px;
+    background: #f9f9f9;
+    font-size: 13px;
+}
+
+.log-body table{
+    width: 100%;
+}
+
+.log-body table tr{
+    border: 1px solid #e8e8e8;
+    font-size: 13px;
+}
+
+.log-body table td{
+    padding: 10px;
+}
+
+.log-body svg{
+    width: 13px;
+}
+
+.log-body .success-svg{
+    color: green;
+}
+.log-body .danger-svg{
+    color: red;
+}
+
+.log-body table .tdStartTime{
+    width: 10%;
+}
+.log-body table .tdStartTime span{
+    background-color: #d7d7d7;
+    padding: 5px 10px;
+    color: #000;
+    border-radius: 5px;
+}
+.log-body table .tdIcon{
+    width: 5%;
+}
+
+.log-body table .tdIndex{
+    width: 7.5%;
+}
+
+.log-body table .tdDuration{
+    width: 11%;
+}
+.log-body table .tdTestName{
+    width: 62.5%;
+}
+
+.noLogSpan{
+    padding: 10px;
+    color: gray;
+    font-size: 14px;
+    font-weight: 200;
+    text-align: center;
+    width: 100%;
+}
+
+.activeLogContent{
+    border-bottom: 2.5px solid orange !important;
+}
+.log-summary-row {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+.log-detail {
+    width: 50%;
+}
+.log-detail label {
+    color: #b3b2b2;
+    font-size: 14px;
+    width: 30%;
+}
+.log-detail span {
+    font-size: 14px;
+}
+
+/* normal screen 1440px */
+@media screen and (min-width: 1440px) {
+    .suite-actions .suitActionBtns {
+        width: 27.5%;
+    }
+
+    .log-body table .tdIcon{
+        width: 5%;
+    }
+    
+    .log-body table .tdIndex{
+        width: 14%;
+    }
+    
+    .log-body table .tdDuration{
+        width: 20.5%;
+    }
+    .log-body table .tdTestName{
+        width: 60%;
+    }
+}
+
+/* large screen 1920px */
+@media screen and (min-width: 1920px) {
+    .suite-actions .suitActionBtns {
+        width: 20%;
+    }
 }

@@ -5,6 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 
 import time
+from datetime import datetime
 
 from .driver import createDriverInstance
 
@@ -22,27 +23,30 @@ def executeWorkflow(workflow):
 
         actions = workflow["actions"]
         for action in actions:
+            singleActionLog = {}
+            start_time = time.time()
             time.sleep(1)
             # @todo -builtin
             # action = actions[index]
             component = action["target"]
             value = component["value"]
 
-            # element
-            if(action["actionType"] not in ["wait"]):
-                if component["identifier"] == "id":
-                    elementStr = (By.ID,value)
-                    element = driver.find_element(By.ID,value)
-                elif component["identifier"] == "xpath":
-                    elementStr = (By.XPATH,value)
-                    element = driver.find_element(By.XPATH,value)
-                elif component["identifier"] == "select":
-                    elementStr = (Select(driver.find_element(By.ID,value)))
-                    element = Select(driver.find_element(By.ID,value))
+
+            try:
+                # element
+                if(action["actionType"] not in ["wait"]):
+                    if component["identifier"] == "id":
+                        elementStr = (By.ID,value)
+                        element = driver.find_element(By.ID,value)
+                    elif component["identifier"] == "xpath":
+                        elementStr = (By.XPATH,value)
+                        element = driver.find_element(By.XPATH,value)
+                    elif component["identifier"] == "select":
+                        elementStr = (Select(driver.find_element(By.ID,value)))
+                        element = Select(driver.find_element(By.ID,value))
             
 
-            # interaction 
-            try:
+                # interaction 
                 if(action["actionType"] == "write"):
                     element.send_keys("")
                     element.send_keys(action["value"])
@@ -77,19 +81,33 @@ def executeWorkflow(workflow):
                 #         print("Test Case : Passed")
                 #     else:
                 #         print("Test Case : Failed")
-                actionLog.append({"status":1,"message":""})
+                singleActionLog["status"] = 1
             except Exception as e:
                 #@todo driver.screenshot
                 print(e)
-                actionLog.append({"status":0,"message":str(e)})
+                singleActionLog["status"] = 0
+                singleActionLog["message"] = str(e)
         
+
+            end_time = time.time()  # Record the end time
+
+            # Calculate the elapsed time for this iteration
+            elapsed_time = end_time - start_time  
+            singleActionLog["duration"] =   f"{elapsed_time:.2f}"
+            singleActionLog["startTime"] =   datetime.fromtimestamp(start_time).strftime('%H:%M:%S')
+
+            actionLog.append(singleActionLog)  
+
 
         driver.close()
         driver.quit()
+        status = 1
 
     except Exception as e:
         driver.close()
         driver.quit()
         print(e)
+        status = 0
 
-    return actionLog
+    response = {"status":status,"log":actionLog}
+    return response

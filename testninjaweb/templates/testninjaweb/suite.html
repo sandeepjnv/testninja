@@ -42,42 +42,74 @@
                         <button id="btnRunTest">Run Test</button>
                     </div>
                 </div>
-                <div class="suite-body">
-                    <input type="text" id="baseUrl" placeholder="https://traacs.in/login"/>
-
-                    <div class="suiteSubActions">
-                        <h6>Work-flow</h6>
-                        <button id="btnNewAction">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-                                <path fill-rule="evenodd" d="M12 5.25a.75.75 0 01.75.75v5.25H18a.75.75 0 010 1.5h-5.25V18a.75.75 0 01-1.5 0v-5.25H6a.75.75 0 010-1.5h5.25V6a.75.75 0 01.75-.75z" clip-rule="evenodd" />
-                            </svg>
-                            New  Action
-                        </button>
+                <div class="suite-content-log">
+                    <div class="suite-body">
+                        <input type="text" id="baseUrl" placeholder="https://traacs.in/login"/>
+    
+                        <div class="suiteSubActions">
+                            <h6>Work-flow</h6>
+                            <button id="btnNewAction">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                    <path fill-rule="evenodd" d="M12 5.25a.75.75 0 01.75.75v5.25H18a.75.75 0 010 1.5h-5.25V18a.75.75 0 01-1.5 0v-5.25H6a.75.75 0 010-1.5h5.25V6a.75.75 0 01.75-.75z" clip-rule="evenodd" />
+                                </svg>
+                                New  Action
+                            </button>
+                        </div>
+    
+                        <table id="tblWorkflow">
+                            <thead>
+                                <th style="width:4%"></th>
+                                <th style="width:4%"></th>
+                                <th style="width:20%">Action</th>
+                                <th style="width:45%">Target</th>
+                                <th style="width:22.5%">Value</th>
+                                <th style="width:3.5%"></th>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
-
-                    <table id="tblWorkflow">
-                        <thead>
-                            <th style="width:4%"></th>
-                            <th style="width:4%"></th>
-                            <th style="width:20%">Action</th>
-                            <th style="width:45%">Target</th>
-                            <th style="width:22.5%">Value</th>
-                            <th style="width:3.5%"></th>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
+                    <div class="suite-log">
+                        <div class="log-body" id="actions-log">
+                            <div class="log-summary">
+                                <div class="log-summary-row">
+                                    <div class="log-detail">
+                                        <label>Tests</label>
+                                        <span id="testPassed"></label>
+                                    </div>
+                                    <div class="log-detail">
+                                        <label>Status</label>
+                                        <span id="testStatus"></label>
+                                    </div>
+                                </div>
+                                <div class="log-summary-row">
+                                    <div class="log-detail">
+                                        <label>Validations</label>
+                                        <span id="validationPassed"></label>
+                                    </div>
+                                    <div class="log-detail">
+                                        <label>Duration</label>
+                                        <span id="testDuration"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <table id='actionLogs'>
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Status</th>
+                                        <th>Test case</th>
+                                        <th>Duration</th>
+                                        <th>Time</th>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="options-list">
-        <ul>
-          <li>Option 1</li>
-          <li>Option 2</li>
-          <!-- Add more options as needed -->
-        </ul>
-      </div>
     <script>
         var actionElement = `<tr id="actionRow{INDEX}">
             <td></td>
@@ -129,23 +161,6 @@
             var initialData = JSON.parse('{{ initialValues|escapejs }}');
 
             loadSuiteAndWorkflowList(initialData);
-
-            const buttons = document.querySelectorAll('.btnActionConfig');
-  
-            buttons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                // Find the corresponding options list for this button's row
-                const row = e.target.closest('tr');
-                const optionsList = row.querySelector('.options-list');
-                
-                // Toggle the visibility of the options list
-                if (optionsList.style.display === 'none' || optionsList.style.display === '') {
-                    optionsList.style.display = 'block';
-                } else {
-                    optionsList.style.display = 'none';
-                }
-                });
-            });
         });
 
         $("#btnNewAction").click(function(){
@@ -206,6 +221,7 @@
                 dataType : 'json',
                 headers: {'X-CSRFToken': '{{ csrf_token }}'},
                 success : function(response) {
+                    renderLogs(response.result.log);
                 }
               });
         });
@@ -355,6 +371,8 @@
             $("#tblWorkflow tbody").html('');
             $("#suitsList li").removeClass("active");
             $("#testName,#btnDeleteTest").removeData("dataWorkflowId") 
+            // log clearence
+            $("#actionLogs tbody").html("<tr><td colspan='5'><label class='noLogSpan'>Run the test to see logs</label></td></tr>");
         }
 
         function loadSuiteAndWorkflowList(jsonMenus){
@@ -421,6 +439,61 @@
                 $(rows[i]).find("td:last").find(".actionBtn").attr("data-actionindex",i);
                 $(rows[i]).find("td:last").find(".deleteAction").attr("onclick","deleteActionFunc("+i+")");
             }
+        }
+
+        // render Logs
+        function renderLogs(logs){
+            var successSvg=`<svg class="success-svg w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+                            </svg>`;
+
+            var errorSvg =  `<svg class="danger-svg w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z"/>
+                            </svg>`;
+
+            var userLog = ""
+            var passed = 0;
+            var duration = 0;
+            $.each(logs, function (key, value) {
+                duration = duration + parseFloat(value.duration);
+                if(value.status == 1){
+                    icon = successSvg;
+                    passed = passed+1;
+                }
+                else{
+                    icon = errorSvg;
+                }
+                userLog += `<tr>
+                                <td class='tdIndex'>`+(key+1)+`
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                        <path fill-rule="evenodd" d="M16.28 11.47a.75.75 0 010 1.06l-7.5 7.5a.75.75 0 01-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 011.06-1.06l7.5 7.5z" clip-rule="evenodd" />
+                                    </svg>                                      
+                                </td>
+                                <td class='tdIcon'>`+icon+`</td>
+                                <td class='tdTestName'></td>
+                                <td class='tdDuration'>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    `+value.duration+`s
+                                </td>
+                                <td class='tdStartTime'><span>`+value.startTime+`</span></td>
+                            </tr>`;
+            });
+            // log summary
+            $("#testPassed").html(passed+"/"+logs.length+" Passed");
+            if(passed == logs.length){
+                $("#testStatus").html("Passed "+successSvg)
+            }
+            else{
+                $("#testStatus").html("Failed "+errorSvg)
+            }
+            // Validations
+
+            // Duration
+            $("#testDuration").html(duration.toFixed(2)+"s");
+
+            $("#actionLogs tbody").html(userLog);
         }
     </script>
 {% endblock %}
